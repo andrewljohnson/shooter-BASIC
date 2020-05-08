@@ -10,9 +10,9 @@ ARRAY bulletys
 bulletcount = 0
 ticks = 0
 boardcenter = 24
-boardsize = 49
+boardsize = 50
 gunx = boardcenter
-guny = boardsize
+guny = boardsize - 1
 plot gunx, guny, "black"
 
 1000 rem main game loop
@@ -38,10 +38,10 @@ if k = "a" then gunx = gunx - 1
 if k = "d" then gunx = gunx + 1
 if k = "w" then guny = guny - 1
 if k = "s" then guny = guny + 1
-if gunx > boardsize then gunx = 0
+if gunx > boardsize - 1 then gunx = 0
 if gunx < 0 then gunx = boardsize
-if guny > boardsize then guny = 0
-if guny < 0 then guny = boardsize
+if guny > boardsize - 1 then guny = 0
+if guny < 0 then guny = boardsize - 1
 plot gunx, guny, "black"
 return
 
@@ -104,8 +104,8 @@ for i = 0 to enemycount
     if enemykilled then gosub 1700
     if enemykilled then gosub 1800
     if enemykilled then goto 1600
-    if enemyy > boardsize then gosub 1700
-    if enemyy > boardsize then goto 1600
+    if enemyy > boardsize - 1 then gosub 1700
+    if enemyy > boardsize - 1 then goto 1600
     if bullety < 0 then gosub 1800
     if bullety < 0 then goto 1600
   next j
