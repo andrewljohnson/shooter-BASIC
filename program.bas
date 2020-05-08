@@ -21,10 +21,10 @@ if ticks % 10 = 0 or ticks = 0 then gosub 1400
 for i = 0 to enemycount
   if gunx = enemyxs[i] and guny = enemyys[i] then goto 10000
 next i
-if enemycount > 0 then gosub 1600
-if enemycount > 0 then gosub 1500
-if enemycount > 0 then gosub 1600
-if bulletcount > 0 then gosub 1300
+if enemycount > 0 and ticks % 5 = 0 then gosub 1600
+if enemycount > 0 and ticks % 5 = 0 then gosub 1500
+if enemycount > 0 and ticks % 5 = 0 then gosub 1600
+if bulletcount > 0 and ticks % 5 = 0 then gosub 1300
 if ticks = 100 then ticks = 0
 k = getchar()
 if k = "i" then gosub 1200
