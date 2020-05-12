@@ -8,6 +8,8 @@ lettercolor = "black"
 letterheight = 5
 letterwidth = 4
 numberofdigits = 0
+timeinseconds = 0
+drawingtime = false
 gosub 1900
 
 ARRAY enemyxs
@@ -30,6 +32,9 @@ plot gunx, guny, "black"
 
 1000 rem main game loop
 ticks = ticks + 1
+if ticks % 100 = 0 then timeinseconds = timeinseconds + 1
+if ticks % 100 = 0 then drawingtime = true
+if ticks % 100 = 0 then gosub 2000
 if ticks % 10 = 0 or ticks = 0 then gosub 1400
 for i = 0 to enemycount
   if gunx = enemyxs[i] and guny = enemyys[i] then goto 999999
@@ -38,7 +43,7 @@ if enemycount > 0 and ticks % 5 = 0 then gosub 1600
 if enemycount > 0 and ticks % 5 = 0 then gosub 1500
 if enemycount > 0 and ticks % 5 = 0 then gosub 1600
 if bulletcount > 0 and ticks % 5 = 0 then gosub 1300
-if ticks = 100 then ticks = 0
+if ticks = 1000 then ticks = 0
 k = getchar()
 if k = "i" then gosub 1200
 if k = "a" or k = "d" or k = "w" or k = "s" then gosub 1100
@@ -161,6 +166,14 @@ return
 gosub 90001
 if killedenemycount = 0 then gosub 99999
 if killedenemycount > 0 and killedenemycount < 10  then gosub killedenemycount * 10000
+return
+
+2000 rem draw time
+print "draw time"
+digit = (boardwidth - letterwidth) / letterwidth
+print digit
+gosub 99999
+digit = 0
 return
 
 999999 rem game over
