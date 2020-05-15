@@ -7,7 +7,7 @@ killedenemycount = 0
 lettercolor = "black"
 letterheight = 5
 letterwidth = 4
-numberofdigits = 0
+numberofdigits = 3
 timeinseconds = 0
 drawingtime = false
 gosub 1900
@@ -162,10 +162,23 @@ bulletys = newbulletys
 bulletcount = bulletcount - 1
 return
 
-1900 rem draw score
+1900 rem draw three-digit score
 gosub 90001
-if killedenemycount = 0 then gosub 99999
-if killedenemycount > 0 and killedenemycount < 10  then gosub killedenemycount * 10000
+digit = 0
+hundreds = FLOOR(killedenemycount / 100)
+print "hundreds is " + hundreds
+if hundreds = 0 then gosub 99999
+if hundreds > 0 then gosub hundreds * 10000
+digit = 1
+tens = FLOOR(killedenemycount % 100 / 10)
+print "tens is " + tens
+if tens = 0 then gosub 99999
+if tens > 0 then  gosub tens * 10000
+digit = 2
+ones = killedenemycount % 10
+print "ones is " + ones
+if ones = 0 then gosub 99999
+if ones > 0 then gosub ones * 10000
 return
 
 2000 rem draw time
@@ -294,7 +307,8 @@ return
 
 90001 rem draw blank
 for w = 0 to numberofdigits
-  for x = 0 + w * (lettwerwidth + 1) to letterwidth + w * (lettwerwidth + 1)
+  for x = 0 + w * (letterwidth) to letterwidth + w * (letterwidth)
+    print "digit is " + w + " and x is " + x
     for y = 0 to letterheight
       plot x, y, "white"
     next y
